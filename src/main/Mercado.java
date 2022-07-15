@@ -23,12 +23,12 @@ public class Mercado {
         System.out.println("------------------------------------------------");
         System.out.println("--------Bem-vindo ao Supermercado!--------");
         System.out.println("------------------------------------------------");
-        System.out.println("*********** Selecione uma operação ***********");
-        System.out.println("|     Opção 1 - Cadastrar   |");
-        System.out.println("|     Opção 2 - Listar      |");
-        System.out.println("|     Opção 3 - Comprar     |");
-        System.out.println("|     Opção 4 - Carrinho    |");
-        System.out.println("|     Opção 5 - Sair        |");
+        System.out.println("*********** Selecione uma operacao ***********");
+        System.out.println("|     Opcao 1 - Cadastrar   |");
+        System.out.println("|     Opcao 2 - Listar      |");
+        System.out.println("|     Opcao 3 - Comprar     |");
+        System.out.println("|     Opcao 4 - Carrinho    |");
+        System.out.println("|     Opcao 5 - Sair        |");
 
         int option = input.nextInt();
 
@@ -46,11 +46,11 @@ public class Mercado {
                 verCarrinho();
                 break;
             case 5:
-                System.out.println("Obrigado pela preferência! Volte sempre.");
+                System.out.println("Obrigado pela preferencia! Volte sempre.");
                 System.exit(0);
                 break;
             default:
-                System.out.println("Opção Invalida!");
+                System.out.println("Opcao Invalida!");
                 menu();
                 break;
         }
@@ -60,7 +60,7 @@ public class Mercado {
         System.out.println("Nome do produto: ");
         String name = input.next();
 
-        System.out.println("Preço do produto: ");
+        System.out.println("Preco do produto: ");
         Double price = input.nextDouble();
 
         Produto produto = new Produto(name, price);
@@ -86,9 +86,9 @@ public class Mercado {
 
     private static void comprarProdutos() {
         if (produtos.size() > 0) {
-            System.out.println("Código do produto: \n");
+            System.out.println("Codigo do produto: \n");
 
-            System.out.println("----------Produtos Disponíveis----------");
+            System.out.println("----------Produtos Disponiveis----------");
             for (Produto p : produtos) {
                 System.out.println(p + "\n");
             }
@@ -102,8 +102,8 @@ public class Mercado {
                     try {
                         qtd = carrinho.get(p);
                         // se o produto ja estiver no carrinho e incrementa quantidade.
-                        carrinho.put(p, qtd  + 1);
-                    }catch (NullPointerException err) {
+                        carrinho.put(p, qtd +1);
+                    }catch (NullPointerException e) {
                         // se o produto for o primeiro do carrinho.
                         carrinho.put(p, 1);
                     }
@@ -123,7 +123,7 @@ public class Mercado {
                         }
                     }
                 } else {
-                    System.out.println("Produto não encontrado. ");
+                    System.out.println("Produto nao encontrado. ");
                     menu();
                 }
             }
@@ -163,9 +163,9 @@ public class Mercado {
             );
             System.out.println("--------------------");
         }
-        System.out.println("O valor das sua compra é: " + Utils.doubleToString(valorDaCompra));
+        System.out.println("Valor das suas compras: " + Utils.doubleToString(valorDaCompra));
         carrinho.clear();
-        System.out.println("Obrigado pela preferência! Volte sempre.");
+        System.out.println("Obrigado pela preferencia! Volte sempre.");
         menu();
     }
 }
