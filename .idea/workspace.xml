@@ -7,6 +7,7 @@
     <list default="true" id="ffa904eb-27db-40b6-96a8-0283a2459a3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Mercado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Mercado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Produto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +49,19 @@
   }
 }</component>
   <component name="RunManager" selected="Application.Mercado">
+    <configuration name="Loja" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="model.Loja" />
+      <module name="untitled" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="untitled" />
@@ -68,9 +82,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Produto" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="model.Produto" />
+      <module name="untitled" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Revista" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="model.Revista" />
+      <module name="untitled" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Mercado" />
+        <item itemvalue="Application.Produto" />
+        <item itemvalue="Application.Revista" />
+        <item itemvalue="Application.Loja" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -85,7 +128,7 @@
       <updated>1657586406296</updated>
       <workItem from="1657586449411" duration="1035000" />
       <workItem from="1657657600184" duration="6634000" />
-      <workItem from="1657848799879" duration="4421000" />
+      <workItem from="1657848799879" duration="11491000" />
     </task>
     <servers />
   </component>
