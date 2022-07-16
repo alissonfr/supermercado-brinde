@@ -15,6 +15,8 @@ public class Mercado {
     private static Stack<Revista> pilha;
     private static Map<Produto, Integer> carrinho;
     private static String actualDate = dataHora.getDate();
+
+
     public static void main (String[] args) {
 
         revistas = new ArrayList<Revista>();
@@ -284,14 +286,20 @@ public class Mercado {
         System.out.println("Valor total das suas compras: " + Utils.doubleToString(valorDaCompra));
         carrinho.clear();
 
-        if (!pilha.empty()) {
-            System.out.println("Voce ganhou a(as) revista(as): \n" + pilha.peek() + "\n");
-            apagarRevistaTopo();
-            menuAdministrador();
-            System.out.println("Obrigado pela preferência! Volte sempre.");
+        if (!(valorDaCompra < 100)) {
+            if (!pilha.empty()) {
+                System.out.println("Voce ganhou a(as) revista(as): \n" + pilha.peek() + "\n");
+                apagarRevistaTopo();
+                menuAdministrador();
+                System.out.println("Obrigado pela preferência! Volte sempre.");
+            } else {
+                System.out.println("Você se enquadra na promoção porém, estamos sem revistas no momento! :(");
+            }
         } else {
-            System.out.println("Estamos sem revistas!");
+            System.out.println("Sua compra foi de menos de R$ 100,00, ou seja, você não se enquadra na promoção");
         }
+
+
         System.exit(0);
     }
 
