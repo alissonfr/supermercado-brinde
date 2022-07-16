@@ -241,17 +241,15 @@ public class Mercado {
         menuCliente();
     }
 
-    private static void listarRevistas() { // TODO: VERIFICAR POR QUE NAO FUNCIONA!!
-        if (pilha.size() > 0) {
-            System.out.println("Lista de revistas: \n");
-
-            for (Revista p : revistas) {
-                System.out.println(p);
+    private static void listarRevistas() {
+        if (!pilha.empty()) {
+            for (Revista r : pilha) {
+                System.out.println(r);
+                System.out.println("-----------------------------");
             }
         } else {
-            System.out.println("Nenhuma revista cadastrada!");
+            System.out.println("A pilha de revistas está vazia!");
         }
-
         menuAdministrador();
     }
 
