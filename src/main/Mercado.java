@@ -15,6 +15,7 @@ public class Mercado {
     private static ArrayList<Produto> produtos;
     private static Stack<Revista> pilha;
     private static Map<Produto, Integer> carrinho;
+    static String stackedAt = dataHora.getDate();
 
 //    private static Object produtos = ProdutosTotal.ProdutosT();
 
@@ -93,7 +94,7 @@ public class Mercado {
         System.out.println("Volume da Revista: ");
         int volume = input.nextInt();
 
-        String stackedAt = dataHora.getDate();
+
 
         Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
         pilha.push(revista);
@@ -102,7 +103,8 @@ public class Mercado {
         menu();
     }
     private static void apagarRevista() {
-        System.out.println("A Revista: '" + pilha.peek().getTitle() + "' foi removida da pilha com sucesso!");
+        System.out.println(
+                "A Revista: '" + pilha.peek().getTitle() + "' foi removida da pilha" + " as " + stackedAt + " com sucesso!");
         pilha.pop();
     }
 
