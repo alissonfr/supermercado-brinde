@@ -61,13 +61,26 @@ package model;
 
 import utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Produto {
     public static void main(String args[]){
-        Produto[] arr = new Produto[2];
-        arr[0] = new Produto("Produto 1", 10.99);
-        arr[1] = new Produto("Produto 2", 66.99);
+        ArrayList<Produto> produto = new ArrayList();
 
+        Produto produto1 = new Produto("Leite 1L", 39.99);
+        Produto produto2 = new Produto("Carne 1Kg", 60.99);
+
+        produto.add(produto1);
+        produto.add(produto2);
+
+        System.out.println(produto);
+
+//        for (Produto p : produto) {
+//            System.out.println(p);
+//        }
     }
+
     private static int count = 1;
 
     private int id;
@@ -101,6 +114,7 @@ public class Produto {
         this.price = price;
     }
 
+@Override
     public String toString() {
         return  "id: " + this.getId() +
                 "\nNome: " + this.getName() +

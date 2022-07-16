@@ -57,6 +57,7 @@ public class Revista {
         this.volume = volume;
     }
 
+@Override
     public String toString() {
         return  "id: " + this.getId() +
                 "\nTitulo: " + this.getTitle() +

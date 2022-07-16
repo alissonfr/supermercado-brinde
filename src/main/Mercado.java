@@ -1,23 +1,33 @@
 package main;
 
 import model.Produto;
+import model.ProdutosTotal;
 import model.Revista;
+import model.RevistaTest;
 import utils.Utils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Mercado {
     private static Scanner input = new Scanner(System.in);
     private static ArrayList<Revista> revistas;
     private static ArrayList<Produto> produtos;
+    private static Stack<Revista> pilha;
     private static Map<Produto, Integer> carrinho;
 
+//    private static Object produtos = ProdutosTotal.ProdutosT();
+
     public static void main (String[] args) {
+
         revistas = new ArrayList<Revista>();
+
+        pilha = new Stack<Revista>();
+
         produtos = new ArrayList<Produto>();
+        Produto produto1 = new Produto("Leite 1L", 39.99);
+        Produto produto2 = new Produto("Carne 1Kg", 60.99);
+        produtos.add(produto1);
+        produtos.add(produto2);
+
         carrinho = new HashMap<Produto, Integer>();
         menu();
     }
@@ -32,8 +42,9 @@ public class Mercado {
         System.out.println("|    Opcao 3 - Carrinho               |");
         System.out.println("************** Modo administrador **************");
         System.out.println("|     Opcao 4 - Cadastrar Revista     |");
-        System.out.println("|     Opcao 5 - Listar Revistas       |");
-        System.out.println("|     Opcao 6 - Sair                  |");
+        System.out.println("|     Opcao 5 - Apagar Revista        |");
+        System.out.println("|     Opcao 6 - Listar Revistas       |");
+        System.out.println("|     Opcao 7 - Sair                  |");
 
         int option = input.nextInt();
 
@@ -48,12 +59,15 @@ public class Mercado {
                 verCarrinho();
                 break;
             case 4:
-                cadastrarRevistas();
+                cadastrarRevista();
                 break;
             case 5:
-                listarRevistas();
+                apagarRevista();
                 break;
             case 6:
+                listarRevistas();
+                break;
+            case 7:
                 System.out.println("Obrigado pela preferencia! Volte sempre.");
                 System.exit(0);
                 break;
@@ -64,7 +78,7 @@ public class Mercado {
         }
     }
 
-    private static void cadastrarRevistas() {
+    private static void cadastrarRevista() {
         System.out.println("Titulo da Revista: ");
         String title = input.next();
 
@@ -78,10 +92,14 @@ public class Mercado {
         int volume = input.nextInt();
 
         Revista revista = new Revista(title, edition, publishedAt, volume);
-        revistas.add(revista);
+        pilha.push(revista);
 
-        System.out.println(revista.getTitle() + " cadastrado com sucesso!");
+        System.out.println(revista + " cadastrado com sucesso!" + pilha.peek());
         menu();
+    }
+    private static void apagarRevista() {
+        System.out.println("A Revista: '" + pilha.peek().getTitle() + "' foi removida da pilha com sucesso!");
+        pilha.pop();
     }
 
     private static void listarProdutos() {
@@ -89,7 +107,7 @@ public class Mercado {
             System.out.println("Lista de produtos: \n");
 
             for (Produto p : produtos) {
-                System.out.println(p);
+                System.out.println(p + "\n-------------------");
             }
         } else {
             System.out.println("Nenhum produto cadastrado!");
@@ -191,7 +209,10 @@ public class Mercado {
             );
             System.out.println("--------------------");
         }
-        System.out.println("Valor das suas compras: " + Utils.doubleToString(valorDaCompra));
+        System.out.println(
+                "Valor das suas compras: " + Utils.doubleToString(valorDaCompra) +
+                        " Voce ganhou: " + valorDaCompra / 100 + " revistas"
+        );
         carrinho.clear();
         System.out.println("Obrigado pela preferencia! Volte sempre.");
         menu();
