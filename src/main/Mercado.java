@@ -5,6 +5,8 @@ import model.ProdutosTotal;
 import model.Revista;
 import model.RevistaTest;
 import utils.Utils;
+import utils.dataHora;
+
 import java.util.*;
 
 public class Mercado {
@@ -91,10 +93,12 @@ public class Mercado {
         System.out.println("Volume da Revista: ");
         int volume = input.nextInt();
 
-        Revista revista = new Revista(title, edition, publishedAt, volume);
+        String stackedAt = dataHora.getDate();
+
+        Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
         pilha.push(revista);
 
-        System.out.println(revista + " cadastrado com sucesso!" + pilha.peek());
+        System.out.println(revista.getTitle() + " cadastrado com sucesso!");
         menu();
     }
     private static void apagarRevista() {
@@ -136,13 +140,14 @@ public class Mercado {
 
             System.out.println("----------Produtos Disponiveis----------");
             for (Produto p : produtos) {
-                System.out.println(p + "\n");
+                System.out.println(p + "\n" + p.getId());
             }
 
             int id = Integer.parseInt(input.next());
             boolean isPresent = false;
 
             for (Produto p : produtos) {
+                System.out.println("(pegando so o primeiro??)pagou: " + p.getPrice());
                 if (p.getId() == id) {
                     int qtd = 0;
                     try {

@@ -10,14 +10,16 @@ public class Revista {
     private int edition;
     private String publishedAt;
     private int volume;
+    private String stackedAt;
 
 
-    public Revista(String title, int edition, String publishedAt, int volume) {
+    public Revista(String title, int edition, String publishedAt, int volume, String stackedAt) {
         this.id = count;
         this.title = title;
         this.edition = edition;
         this.publishedAt = publishedAt;
         this.volume = volume;
+        this.stackedAt = stackedAt;
         Revista.count += 1;
     }
 
@@ -57,13 +59,22 @@ public class Revista {
         this.volume = volume;
     }
 
-@Override
+    public String getStackedAt() {
+        return stackedAt;
+    }
+
+    public void setStackedAt(String stackedAt) {
+        this.stackedAt = stackedAt;
+    }
+
+    @Override
     public String toString() {
         return  "id: " + this.getId() +
                 "\nTitulo: " + this.getTitle() +
                 "\nEdicao: " + this.getEdition() +
                 "\nPublicado em: " + this.getPublishedAt() +
-                "\nVolume: " + this.getVolume();
+                "\nVolume: " + this.getVolume() +
+                "\nAdicionado a pilha em: " + this.getStackedAt();
 
     }
 }
