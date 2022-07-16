@@ -5,6 +5,7 @@ import model.Revista;
 import utils.Utils;
 import utils.dataHora;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Mercado {
@@ -13,7 +14,7 @@ public class Mercado {
     private static ArrayList<Produto> produtos;
     private static Stack<Revista> pilha;
     private static Map<Produto, Integer> carrinho;
-    static String stackedAt = dataHora.getDate();
+    private static String actualDate = dataHora.getDate();
     public static void main (String[] args) {
 
         revistas = new ArrayList<Revista>();
@@ -168,6 +169,7 @@ public class Mercado {
     }
 
     public static void menuAdministrador() {
+        System.out.println("Horário atual: " + actualDate);
         System.out.println("************ Selecione uma operacao ************");
         System.out.println("|     Opcao 1 - Cadastrar Revista     |");
         System.out.println("|     Opcao 2 - Apagar Revista        |");
@@ -279,12 +281,13 @@ public class Mercado {
             );
             System.out.println("--------------------");
         }
-        System.out.println("Valor das suas compras: " + Utils.doubleToString(valorDaCompra));
+        System.out.println("Valor total das suas compras: " + Utils.doubleToString(valorDaCompra));
         carrinho.clear();
 
         if (!pilha.empty()) {
-            System.out.println("Voce ganhou a revista: " + pilha.peek());
+            System.out.println("Voce ganhou a(as) revista(as): \n" + pilha.peek() + "\n");
             apagarRevistaTopo();
+            menuAdministrador();
             System.out.println("Obrigado pela preferência! Volte sempre.");
         } else {
             System.out.println("Estamos sem revistas!");
@@ -321,16 +324,20 @@ public class Mercado {
         System.out.println("Volume da Revista: ");
         int volume = input.nextInt();
 
-        Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
+        String stackedAt = actualDate;
+
+        Revista revista = new Revista(title, edition, publishedAt, volume, actualDate);
         pilha.push(revista);
 
-        System.out.println("A Revista: '" + revista.getTitle() + "' foi cadastrada com sucesso!");
+        System.out.println("A revista: '" + revista.getTitle() + "' foi cadastrada com sucesso as: " + revista.getStackedAt());
         menuAdministrador();
     }
 
     private static void apagarRevistaTopo() {
+        String popedAt = actualDate;
+
         System.out.println(
-                "A Revista: '" + pilha.peek().getTitle() + "' foi removida da pilha" + " as " + stackedAt + " com sucesso!");
+                "A revista: '" + pilha.peek().getTitle() + "' foi removida da pilha" + " as " + actualDate + " com sucesso!");
         pilha.pop();
         menuAdministrador();
     }
