@@ -109,9 +109,9 @@ public class Mercado {
         System.out.println("------------------------------------------------");
         System.out.println("-----------Bem-vindo ao Supermercado!-----------");
         System.out.println("------------------------------------------------");
-        System.out.println("**************** Se Identifique ****************");
+        System.out.println("**************** Identifique-se ****************");
         System.out.println("|      Opcao 1 - Cliente           |");
-        System.out.println("|      Opcao 2 - Funcionario       |");
+        System.out.println("|      Opcao 2 - Administrador     |");
         System.out.println("|      Opcao 3 - Sair              |");
 
         int option = input.nextInt();
@@ -124,18 +124,18 @@ public class Mercado {
                 menuAdministrador();
                 break;
             case 3:
-                System.out.println("Obrigado pela preferencia! Volte sempre.");
+                System.out.println("Obrigado pela preferência! Volte sempre.");
                 System.exit(0);
                 break;
             default:
-                System.out.println("Opcao Invalida!");
+                System.out.println("Opção Inválida!");
                 menu();
                 break;
         }
     }
     public static void menuCliente() {
-        System.out.println("************ Selecione uma operacao ************");
-        System.out.println("|    Opcao 1 - Produtos Disponiveis   |");
+        System.out.println("************ Selecione uma operação ************");
+        System.out.println("|    Opcao 1 - Produtos Disponíveis   |");
         System.out.println("|    Opcao 2 - Comprar                |");
         System.out.println("|    Opcao 3 - Carrinho               |");
         System.out.println("|    Opcao 4 - Voltar                 |");
@@ -157,11 +157,11 @@ public class Mercado {
                 menu();
                 break;
             case 5:
-                System.out.println("Obrigado pela preferencia! Volte sempre.");
+                System.out.println("Obrigado pela preferência! Volte sempre.");
                 System.exit(0);
                 break;
             default:
-                System.out.println("Opcao Invalida!");
+                System.out.println("Opção Inválida!");
                 menuCliente();
                 break;
         }
@@ -191,33 +191,33 @@ public class Mercado {
                 menu();
                 break;
             case 5:
-                System.out.println("Obrigado pela preferencia! Volte sempre.");
+                System.out.println("Obrigado pela preferência! Volte sempre.");
                 System.exit(0);
                 break;
             default:
-                System.out.println("Opcao Invalida!");
+                System.out.println("Opção Inválida!");
                 menuAdministrador();
                 break;
         }
     }
 
     private static void cadastrarRevista() {
-        System.out.print("Titulo da Revista (sem espaços): ");
+        System.out.print("Título da Revista (sem espaços): ");
         String title = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
 
-        System.out.println("Edicao da Revista: ");
+        System.out.println("Edicão da Revista: ");
         int edition = input.nextInt();
 
-        System.out.println("Data de Publicacao da Revista: ");
-        String publishedAt = input.next();
+        System.out.println("Data de Publicação da Revista: ");
+        String publishedAt = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
 
         System.out.println("Volume da Revista: ");
-        int volume = input.nextInt(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
+        int volume = input.nextInt();
 
         Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
         pilha.push(revista);
 
-        System.out.println(revista.getTitle() + " cadastrado com sucesso!");
+        System.out.println("A Revista: '" + revista.getTitle() + "' foi cadastrada com sucesso!");
         menuAdministrador();
     }
     private static void apagarRevista() {
@@ -249,7 +249,7 @@ public class Mercado {
                 System.out.println(p);
             }
         } else {
-            System.out.println("Nenhuma revista cadastrado!");
+            System.out.println("Nenhuma revista cadastrada!");
         }
 
         menuAdministrador();
@@ -257,9 +257,9 @@ public class Mercado {
 
     private static void comprarProdutos() {
         if (produtos.size() > 0) {
-            System.out.println("Codigo do produto: \n");
+            System.out.println("Código do produto: \n");
 
-            System.out.println("----------Produtos Disponiveis----------");
+            System.out.println("----------Produtos Disponíveis----------");
             for (Produto p : produtos) {
                 System.out.println(p + "\n");
             }
@@ -276,10 +276,10 @@ public class Mercado {
                     int qtd = 0;
                     try {
                         qtd = carrinho.get(p);
-                        // se o produto ja estiver no carrinho e incrementa quantidade.
+                        // Se o produto ja estiver no carrinho e incrementa quantidade
                         carrinho.put(p, qtd +1);
                     }catch (NullPointerException e) {
-                        // se o produto for o primeiro do carrinho.
+                        // Se o produto for o primeiro do carrinho
                         carrinho.put(p, 1);
                     }
 
@@ -300,7 +300,7 @@ public class Mercado {
                 }
             }
         } else {
-            System.out.println("Não existem produtos cadastrados!. ");
+            System.out.println("Não existem produtos cadastrados! ");
             menuCliente();
         }
     }
@@ -341,7 +341,7 @@ public class Mercado {
         );
         apagarRevista();
         carrinho.clear();
-        System.out.println("Obrigado pela preferencia! Volte sempre.");
-        menu();
+        System.out.println("Obrigado pela preferência! Volte sempre.");
+        System.exit(0);
     }
 }
