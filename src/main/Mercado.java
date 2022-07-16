@@ -1,9 +1,7 @@
 package main;
 
 import model.Produto;
-import model.ProdutosTotal;
 import model.Revista;
-import model.RevistaTest;
 import utils.Utils;
 import utils.dataHora;
 
@@ -16,9 +14,6 @@ public class Mercado {
     private static Stack<Revista> pilha;
     private static Map<Produto, Integer> carrinho;
     static String stackedAt = dataHora.getDate();
-
-//    private static Object produtos = ProdutosTotal.ProdutosT();
-
     public static void main (String[] args) {
 
         revistas = new ArrayList<Revista>();
@@ -31,7 +26,7 @@ public class Mercado {
         produtos.add(produto1);
         produtos.add(produto2);
 
-        carrinho = new HashMap<Produto, Integer>();
+        carrinho = new HashMap<>();
         menu();
     }
 
@@ -39,15 +34,37 @@ public class Mercado {
         System.out.println("------------------------------------------------");
         System.out.println("-----------Bem-vindo ao Supermercado!-----------");
         System.out.println("------------------------------------------------");
+        System.out.println("**************** Se Identifique ****************");
+        System.out.println("|      Opcao 1 - Cliente           |");
+        System.out.println("|      Opcao 2 - Funcionario       |");
+        System.out.println("|      Opcao 3 - Sair              |");
+
+        int option = input.nextInt();
+
+        switch (option) {
+            case 1:
+                menuCliente();
+                break;
+            case 2:
+                menuAdministrador();
+                break;
+            case 3:
+                System.out.println("Obrigado pela preferencia! Volte sempre.");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Opcao Invalida!");
+                menu();
+                break;
+        }
+    }
+    public static void menuCliente() {
         System.out.println("************ Selecione uma operacao ************");
         System.out.println("|    Opcao 1 - Produtos Disponiveis   |");
         System.out.println("|    Opcao 2 - Comprar                |");
         System.out.println("|    Opcao 3 - Carrinho               |");
-        System.out.println("************** Modo administrador **************");
-        System.out.println("|     Opcao 4 - Cadastrar Revista     |");
-        System.out.println("|     Opcao 5 - Apagar Revista        |");
-        System.out.println("|     Opcao 6 - Listar Revistas       |");
-        System.out.println("|     Opcao 7 - Sair                  |");
+        System.out.println("|    Opcao 4 - Voltar                 |");
+        System.out.println("|    Opcao 5 - Sair                   |");
 
         int option = input.nextInt();
 
@@ -62,28 +79,56 @@ public class Mercado {
                 verCarrinho();
                 break;
             case 4:
-                cadastrarRevista();
+                menu();
                 break;
             case 5:
-                apagarRevista();
-                break;
-            case 6:
-                listarRevistas();
-                break;
-            case 7:
                 System.out.println("Obrigado pela preferencia! Volte sempre.");
                 System.exit(0);
                 break;
             default:
                 System.out.println("Opcao Invalida!");
+                menuCliente();
+                break;
+        }
+    }
+
+    public static void menuAdministrador() {
+        System.out.println("************ Selecione uma operacao ************");
+        System.out.println("|     Opcao 1 - Cadastrar Revista     |");
+        System.out.println("|     Opcao 2 - Apagar Revista        |");
+        System.out.println("|     Opcao 3 - Listar Revistas       |");
+        System.out.println("|     Opcao 4 - Voltar                |");
+        System.out.println("|     Opcao 5 - Sair                  |");
+
+        int option = input.nextInt();
+
+        switch (option) {
+            case 1:
+                cadastrarRevista();
+                break;
+            case 2:
+                apagarRevista();
+                break;
+            case 3:
+                listarRevistas();
+                break;
+            case 4:
                 menu();
+                break;
+            case 5:
+                System.out.println("Obrigado pela preferencia! Volte sempre.");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Opcao Invalida!");
+                menuAdministrador();
                 break;
         }
     }
 
     private static void cadastrarRevista() {
-        System.out.println("Titulo da Revista: ");
-        String title = input.next();
+        System.out.print("Titulo da Revista (sem espaços): ");
+        String title = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
 
         System.out.println("Edicao da Revista: ");
         int edition = input.nextInt();
@@ -92,20 +137,19 @@ public class Mercado {
         String publishedAt = input.next();
 
         System.out.println("Volume da Revista: ");
-        int volume = input.nextInt();
-
-
+        int volume = input.nextInt(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
 
         Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
         pilha.push(revista);
 
         System.out.println(revista.getTitle() + " cadastrado com sucesso!");
-        menu();
+        menuAdministrador();
     }
     private static void apagarRevista() {
         System.out.println(
                 "A Revista: '" + pilha.peek().getTitle() + "' foi removida da pilha" + " as " + stackedAt + " com sucesso!");
         pilha.pop();
+        menuAdministrador();
     }
 
     private static void listarProdutos() {
@@ -119,11 +163,11 @@ public class Mercado {
             System.out.println("Nenhum produto cadastrado!");
         }
 
-        menu();
+        menuCliente();
     }
 
-    private static void listarRevistas() {
-        if (revistas.size() > 0) {
+    private static void listarRevistas() { // TODO: VERIFICAR POR QUE NAO FUNCIONA!!
+        if (pilha.size() > 0) {
             System.out.println("Lista de revistas: \n");
 
             for (Revista p : revistas) {
@@ -133,7 +177,7 @@ public class Mercado {
             System.out.println("Nenhuma revista cadastrado!");
         }
 
-        menu();
+        menuAdministrador();
     }
 
     private static void comprarProdutos() {
@@ -142,14 +186,17 @@ public class Mercado {
 
             System.out.println("----------Produtos Disponiveis----------");
             for (Produto p : produtos) {
-                System.out.println(p + "\n" + p.getId());
+                System.out.println(p + "\n");
             }
 
             int id = Integer.parseInt(input.next());
             boolean isPresent = false;
 
+            if (id > produtos.size()) {
+                System.out.println("Produto não encontrado!");
+            }
+
             for (Produto p : produtos) {
-                System.out.println("(pegando so o primeiro??)pagou: " + p.getPrice());
                 if (p.getId() == id) {
                     int qtd = 0;
                     try {
@@ -175,14 +222,11 @@ public class Mercado {
                             finalizarCompra();
                         }
                     }
-                } else {
-                    System.out.println("Produto nao encontrado. ");
-                    menu();
                 }
             }
         } else {
             System.out.println("Não existem produtos cadastrados!. ");
-            menu();
+            menuCliente();
         }
     }
 
@@ -199,7 +243,7 @@ public class Mercado {
             System.out.println("Carrinho vazio!");
         }
 
-        menu();
+        menuCliente();
     }
 
     private static void finalizarCompra() {
@@ -218,8 +262,9 @@ public class Mercado {
         }
         System.out.println(
                 "Valor das suas compras: " + Utils.doubleToString(valorDaCompra) +
-                        " Voce ganhou: " + valorDaCompra / 100 + " revistas"
+                        "\nVoce ganhou a revista: " + pilha.peek()
         );
+        apagarRevista();
         carrinho.clear();
         System.out.println("Obrigado pela preferencia! Volte sempre.");
         menu();
