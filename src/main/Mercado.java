@@ -182,7 +182,7 @@ public class Mercado {
                 cadastrarRevista();
                 break;
             case 2:
-                apagarRevista();
+                apagarRevistaTopo();
                 break;
             case 3:
                 listarRevistas();
@@ -201,32 +201,6 @@ public class Mercado {
         }
     }
 
-    private static void cadastrarRevista() {
-        System.out.print("Título da Revista (sem espaços): ");
-        String title = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
-
-        System.out.println("Edicão da Revista: ");
-        int edition = input.nextInt();
-
-        System.out.println("Data de Publicação da Revista: ");
-        String publishedAt = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
-
-        System.out.println("Volume da Revista: ");
-        int volume = input.nextInt();
-
-        Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
-        pilha.push(revista);
-
-        System.out.println("A Revista: '" + revista.getTitle() + "' foi cadastrada com sucesso!");
-        menuAdministrador();
-    }
-    private static void apagarRevista() {
-        System.out.println(
-                "A Revista: '" + pilha.peek().getTitle() + "' foi removida da pilha" + " as " + stackedAt + " com sucesso!");
-        pilha.pop();
-        menuAdministrador();
-    }
-
     private static void listarProdutos() {
         if (produtos.size() > 0) {
             System.out.println("Lista de produtos: \n");
@@ -239,18 +213,6 @@ public class Mercado {
         }
 
         menuCliente();
-    }
-
-    private static void listarRevistas() {
-        if (!pilha.empty()) {
-            for (Revista r : pilha) {
-                System.out.println(r);
-                System.out.println("-----------------------------");
-            }
-        } else {
-            System.out.println("A pilha de revistas está vazia!");
-        }
-        menuAdministrador();
     }
 
     private static void comprarProdutos() {
@@ -303,22 +265,6 @@ public class Mercado {
         }
     }
 
-    private static void verCarrinho() {
-        System.out.println("----------Produtos no carrinho----------");
-        if (carrinho.size() > 0) {
-            for (Produto p : carrinho.keySet()) {
-                System.out.println(
-                        "Produto: " + p +
-                        "\nQuantidade: " + carrinho.get(p)
-                );
-            }
-        } else {
-            System.out.println("Carrinho vazio!");
-        }
-
-        menuCliente();
-    }
-
     private static void finalizarCompra() {
         Double valorDaCompra = 0.0;
         System.out.println("Seus produtos!");
@@ -333,13 +279,72 @@ public class Mercado {
             );
             System.out.println("--------------------");
         }
-        System.out.println(
-                "Valor das suas compras: " + Utils.doubleToString(valorDaCompra) +
-                        "\nVoce ganhou a revista: " + pilha.peek()
-        );
-        apagarRevista();
+        System.out.println("Valor das suas compras: " + Utils.doubleToString(valorDaCompra));
         carrinho.clear();
-        System.out.println("Obrigado pela preferência! Volte sempre.");
+
+        if (!pilha.empty()) {
+            System.out.println("Voce ganhou a revista: " + pilha.peek());
+            apagarRevistaTopo();
+            System.out.println("Obrigado pela preferência! Volte sempre.");
+        } else {
+            System.out.println("Estamos sem revistas!");
+        }
         System.exit(0);
     }
+
+    private static void verCarrinho() {
+        System.out.println("----------Produtos no carrinho----------");
+        if (carrinho.size() > 0) {
+            for (Produto p : carrinho.keySet()) {
+                System.out.println(
+                        "Produto: " + p +
+                                "\nQuantidade: " + carrinho.get(p)
+                );
+            }
+        } else {
+            System.out.println("Carrinho vazio!");
+        }
+
+        menuCliente();
+    }
+
+    private static void cadastrarRevista() {
+        System.out.print("Título da Revista (sem espaços): ");
+        String title = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
+
+        System.out.println("Edicão da Revista: ");
+        int edition = input.nextInt();
+
+        System.out.println("Data de Publicação da Revista: ");
+        String publishedAt = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
+
+        System.out.println("Volume da Revista: ");
+        int volume = input.nextInt();
+
+        Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
+        pilha.push(revista);
+
+        System.out.println("A Revista: '" + revista.getTitle() + "' foi cadastrada com sucesso!");
+        menuAdministrador();
+    }
+
+    private static void apagarRevistaTopo() {
+        System.out.println(
+                "A Revista: '" + pilha.peek().getTitle() + "' foi removida da pilha" + " as " + stackedAt + " com sucesso!");
+        pilha.pop();
+        menuAdministrador();
+    }
+
+    private static void listarRevistas() {
+        if (!pilha.empty()) {
+            for (Revista r : pilha) {
+                System.out.println(r);
+                System.out.println("-----------------------------");
+            }
+        } else {
+            System.out.println("A pilha de revistas está vazia!");
+        }
+        menuAdministrador();
+    }
+
 }
