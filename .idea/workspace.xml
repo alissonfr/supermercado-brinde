@@ -7,7 +7,6 @@
     <list default="true" id="ffa904eb-27db-40b6-96a8-0283a2459a3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Mercado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Mercado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/dataHora.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/dataHora.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +137,7 @@
       <updated>1657586406296</updated>
       <workItem from="1657586449411" duration="1035000" />
       <workItem from="1657657600184" duration="6634000" />
-      <workItem from="1657848799879" duration="60059000" />
+      <workItem from="1657848799879" duration="62475000" />
     </task>
     <servers />
   </component>

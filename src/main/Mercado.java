@@ -4,13 +4,9 @@ import model.Produto;
 import model.Revista;
 import utils.Utils;
 import utils.dataHora;
-
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import java.time.LocalDateTime;
 import java.util.*;
+import java.util.Scanner;
 
 public class Mercado {
     private static Scanner input = new Scanner(System.in);
@@ -329,14 +325,17 @@ public class Mercado {
     }
 
     private static void cadastrarRevista() throws InterruptedException {
-        System.out.print("Título da Revista (sem espaços): ");
-        String title = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Título da Revista: ");
+        String title = input.nextLine();
 
         System.out.println("Edicão da Revista: ");
         int edition = input.nextInt();
 
-        System.out.println("Data de Publicação da Revista: ");
-        String publishedAt = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
+        System.out.print("Data de Publicação da Revista: ");
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        String publishedAt = scanner.next();
 
         System.out.println("Volume da Revista: ");
         int volume = input.nextInt();
