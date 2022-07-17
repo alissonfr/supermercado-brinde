@@ -4,6 +4,8 @@ import model.Produto;
 import model.Revista;
 import utils.Utils;
 import utils.dataHora;
+
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -343,7 +345,7 @@ public class Mercado {
         System.out.println("Volume da Revista: ");
         int volume = input.nextInt();
 
-        String stackedAt = dataHora.getDate();
+        String stackedAt = dataHora.getTime(dataHora.getDateTime());
 
         Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
         pilha.push(revista);
@@ -354,7 +356,10 @@ public class Mercado {
     }
 
     private static void apagarRevistaTopo(double valorDaCompra) throws InterruptedException {
-        String popedAt = dataHora.getDate();
+        String popedAt = dataHora.getDateTime();
+
+        String popedTime = dataHora.getTime(popedAt);
+        LocalTime agora = LocalTime.parse(dataHora.getTime(dataHora.getDateTime()));
         // TODO: SE NAO TIVER REVISTAS SUFICIENTES DÁ ERRO
 
         for (int quantidadeRevistas=(int) (valorDaCompra/100) ; quantidadeRevistas >= 1; quantidadeRevistas--) {
@@ -363,6 +368,7 @@ public class Mercado {
                             pilha.peek() +
                             "\nFOI REMOVIDA DA PILHA COM SUCESSO EM: " +
                             popedAt +
+                            "\nela permaneceu: " + dataHora.mostrar(agora, popedTime) + " na pilha."+
                             "\n----------------------------------------");
             pilha.pop();
         }
