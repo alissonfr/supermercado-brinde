@@ -398,7 +398,7 @@ public class Mercado {
     }
 
     private static void mediaRevistas(int tempoPermanecidoSegundos) {
-        System.out.println("Tempo médio de permanência das revistas: " + tempoPermanecidoSegundos);
+        System.out.println("Tempo médio de permanência das revistas: " + tempoPermanecidoSegundos/tempoPermanecidoSegundos);
     }
 
 }
