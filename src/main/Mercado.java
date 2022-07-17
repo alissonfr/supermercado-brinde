@@ -4,6 +4,8 @@ import model.Produto;
 import model.Revista;
 import utils.Utils;
 import utils.dataHora;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -14,10 +16,8 @@ public class Mercado {
     private static ArrayList<Produto> produtos;
     private static Stack<Revista> pilha;
     private static Map<Produto, Integer> carrinho;
-    private static String actualDate = dataHora.getDate();
 
-
-    public static void main (String[] args) {
+    public static void main (String[] args) throws InterruptedException {
 
         revistas = new ArrayList<Revista>();
 
@@ -108,7 +108,7 @@ public class Mercado {
         menu();
     }
 
-    public static void menu() {
+    public static void menu() throws InterruptedException {
         System.out.println("------------------------------------------------");
         System.out.println("-----------Bem-vindo ao Supermercado!-----------");
         System.out.println("------------------------------------------------");
@@ -136,7 +136,7 @@ public class Mercado {
                 break;
         }
     }
-    public static void menuCliente() {
+    public static void menuCliente() throws InterruptedException {
         System.out.println("************ Selecione uma operação ************");
         System.out.println("|    Opcao 1 - Produtos Disponíveis   |");
         System.out.println("|    Opcao 2 - Comprar                |");
@@ -170,8 +170,7 @@ public class Mercado {
         }
     }
 
-    public static void menuAdministrador() {
-        System.out.println("Horário atual: " + actualDate);
+    public static void menuAdministrador() throws InterruptedException {
         System.out.println("************ Selecione uma operacao ************");
         System.out.println("|     Opcao 1 - Cadastrar Revista     |");
         System.out.println("|     Opcao 2 - Apagar Revista        |");
@@ -186,7 +185,7 @@ public class Mercado {
                 cadastrarRevista();
                 break;
             case 2:
-                apagarRevistaTopo();
+//                apagarRevistaTopo();
                 break;
             case 3:
                 listarRevistas();
@@ -205,7 +204,7 @@ public class Mercado {
         }
     }
 
-    private static void listarProdutos() {
+    private static void listarProdutos() throws InterruptedException {
         if (produtos.size() > 0) {
             System.out.println("Lista de produtos: \n");
 
@@ -215,11 +214,11 @@ public class Mercado {
         } else {
             System.out.println("Nenhum produto cadastrado!");
         }
-
+        Thread.sleep(5000);
         menuCliente();
     }
 
-    private static void comprarProdutos() {
+    private static void comprarProdutos() throws InterruptedException {
         if (produtos.size() > 0) {
             System.out.println("Código do produto: \n");
 
@@ -252,24 +251,36 @@ public class Mercado {
 
                     if (isPresent) {
                         System.out.println("Deseja adicionar outro produto ao carrinho? ");
-                        System.out.println("Digite 1 para sim, ou 0 para finalizar a compra. ");
+                        System.out.println("Digite 1 para sim, 2 para finalizar a compra e 3 para voltar. ");
                         int option = Integer.parseInt(input.next());
 
-                        if (option == 1) {
-                            comprarProdutos();
-                        } else {
-                            finalizarCompra();
+                        switch (option) {
+                            case 1:
+                                comprarProdutos();
+                                break;
+                            case 2:
+                                finalizarCompra();
+                                break;
+                            case 3:
+                                menuCliente();
+                                break;
+                            default:
+                                System.out.println("Opção Inválida!");
+                                Thread.sleep(2000);
+                                menuCliente();
+                                break;
                         }
                     }
                 }
             }
         } else {
             System.out.println("Não existem produtos cadastrados! ");
+            Thread.sleep(2000);
             menuCliente();
         }
     }
 
-    private static void finalizarCompra() {
+    private static void finalizarCompra() throws InterruptedException {
         Double valorDaCompra = 0.0;
         System.out.println("Seus produtos!");
 
@@ -281,16 +292,18 @@ public class Mercado {
                     "Quantidade: " + qtd
 
             );
-            System.out.println("--------------------");
+            System.out.println("----------------------------------------");
         }
-        System.out.println("Valor total das suas compras: " + Utils.doubleToString(valorDaCompra));
+        Thread.sleep(2000);
+
+        int quantidadeRevistas = (int) (valorDaCompra/100);
+        System.out.println("Valor total das suas compras: " + Utils.doubleToString(valorDaCompra) +
+                "\nVocê deve receber: " + quantidadeRevistas + " revistas!");
         carrinho.clear();
 
         if (!(valorDaCompra < 100)) {
             if (!pilha.empty()) {
-                System.out.println("Voce ganhou a(as) revista(as): \n" + pilha.peek() + "\n");
-                apagarRevistaTopo();
-                menuAdministrador();
+                    apagarRevistaTopo(valorDaCompra);
                 System.out.println("Obrigado pela preferência! Volte sempre.");
             } else {
                 System.out.println("Você se enquadra na promoção porém, estamos sem revistas no momento! :(");
@@ -298,28 +311,26 @@ public class Mercado {
         } else {
             System.out.println("Sua compra foi de menos de R$ 100,00, ou seja, você não se enquadra na promoção");
         }
-
-
-        System.exit(0);
     }
 
-    private static void verCarrinho() {
+    private static void verCarrinho() throws InterruptedException {
         System.out.println("----------Produtos no carrinho----------");
         if (carrinho.size() > 0) {
             for (Produto p : carrinho.keySet()) {
                 System.out.println(
-                        "Produto: " + p +
-                                "\nQuantidade: " + carrinho.get(p)
+                                "Produto: " + p +
+                                "\nQuantidade: " + carrinho.get(p) +
+                                "\n----------------------------------------"
                 );
             }
         } else {
             System.out.println("Carrinho vazio!");
         }
-
+        Thread.sleep(2000);
         menuCliente();
     }
 
-    private static void cadastrarRevista() {
+    private static void cadastrarRevista() throws InterruptedException {
         System.out.print("Título da Revista (sem espaços): ");
         String title = input.next(); // TODO: BUG, NÃO ACEITA ESPAÇOS (??)
 
@@ -332,25 +343,35 @@ public class Mercado {
         System.out.println("Volume da Revista: ");
         int volume = input.nextInt();
 
-        String stackedAt = actualDate;
+        String stackedAt = dataHora.getDate();
 
-        Revista revista = new Revista(title, edition, publishedAt, volume, actualDate);
+        Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
         pilha.push(revista);
 
         System.out.println("A revista: '" + revista.getTitle() + "' foi cadastrada com sucesso as: " + revista.getStackedAt());
+        Thread.sleep(2000);
         menuAdministrador();
     }
 
-    private static void apagarRevistaTopo() {
-        String popedAt = actualDate;
+    private static void apagarRevistaTopo(double valorDaCompra) throws InterruptedException {
+        String popedAt = dataHora.getDate();
+        // TODO: SE NAO TIVER REVISTAS SUFICIENTES DÁ ERRO
 
-        System.out.println(
-                "A revista: '" + pilha.peek().getTitle() + "' foi removida da pilha" + " as " + actualDate + " com sucesso!");
-        pilha.pop();
-        menuAdministrador();
+        for (int quantidadeRevistas=(int) (valorDaCompra/100) ; quantidadeRevistas >= 1; quantidadeRevistas--) {
+            System.out.println(
+                            "A REVISTA: \n"  +
+                            pilha.peek() +
+                            "\nFOI REMOVIDA DA PILHA COM SUCESSO EM: " +
+                            popedAt +
+                            "\n----------------------------------------");
+            pilha.pop();
+        }
+        Thread.sleep(5000);
+        menu();
+
     }
 
-    private static void listarRevistas() {
+    private static void listarRevistas() throws InterruptedException {
         if (!pilha.empty()) {
             for (Revista r : pilha) {
                 System.out.println(r);
