@@ -3,7 +3,7 @@ package main;
 import model.Produto;
 import model.Revista;
 import utils.Utils;
-import utils.dataHora;
+import utils.DataHora;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.Scanner;
@@ -340,21 +340,23 @@ public class Mercado {
         System.out.println("Volume da Revista: ");
         int volume = input.nextInt();
 
-        String stackedAt = dataHora.getTime(dataHora.getDateTime());
+        String stackedTime = DataHora.getTime(DataHora.getDateTime());
+        String stackedDate = DataHora.getDate(DataHora.getDateTime());
 
-        Revista revista = new Revista(title, edition, publishedAt, volume, stackedAt);
+        Revista revista = new Revista(title, edition, publishedAt, volume, stackedTime, stackedDate);
         pilha.push(revista);
 
-        System.out.println("A revista: '" + revista.getTitle() + "' foi cadastrada com sucesso as: " + revista.getStackedAt());
+        System.out.println(
+                "A revista: '" + revista.getTitle() + "' foi cadastrada com sucesso as: " + revista.getStackedTime() + " em " + revista.getStackedDate());
         Thread.sleep(2000);
         menuAdministrador();
     }
 
     private static void apagarRevistaTopo(double valorDaCompra) throws InterruptedException {
-        String popedAt = dataHora.getDateTime();
+        String popedAt = DataHora.getDateTime();
 
-        String popedTime = dataHora.getTime(popedAt);
-        LocalTime agora = LocalTime.parse(dataHora.getTime(dataHora.getDateTime()));
+        String popedTime = DataHora.getTime(popedAt);
+        LocalTime agora = LocalTime.parse(DataHora.getTime(DataHora.getDateTime()));
         // TODO: SE NAO TIVER REVISTAS SUFICIENTES DÁ ERRO
 
         for (int quantidadeRevistas=(int) (valorDaCompra/100) ; quantidadeRevistas >= 1; quantidadeRevistas--) {
@@ -363,7 +365,7 @@ public class Mercado {
                             pilha.peek() +
                             "\nFOI REMOVIDA DA PILHA COM SUCESSO EM: " +
                             popedAt +
-                            "\nela permaneceu: " + dataHora.mostrar(agora, popedTime) + " na pilha."+
+                            "\nela permaneceu: " + DataHora.mostrar(agora, popedTime) + " na pilha."+
                             "\n----------------------------------------");
             pilha.pop();
         }

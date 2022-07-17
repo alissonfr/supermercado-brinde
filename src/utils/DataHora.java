@@ -4,16 +4,19 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-public class dataHora {
+public class DataHora {
 
     public static String getDateTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
         return dtf.format(LocalDateTime.now());
     };
+
+    public static String getDate(String getDateTime) {
+        String date = getDateTime.substring(1, 10);
+        return date;
+    }
 
     public static String getTime(String getDateTime) {
         String time = getDateTime.substring(11, 19);
