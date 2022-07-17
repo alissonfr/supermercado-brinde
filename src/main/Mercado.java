@@ -172,9 +172,8 @@ public class Mercado {
         System.out.println("************ Selecione uma operacao ************");
         System.out.println("|     Opcao 1 - Cadastrar Revista     |");
         System.out.println("|     Opcao 2 - Listar Revistas       |");
-        System.out.println("|     Opcao 3 - Média de tempo        |");
-        System.out.println("|     Opcao 4 - Voltar                |");
-        System.out.println("|     Opcao 5 - Sair                  |");
+        System.out.println("|     Opcao 3 - Voltar                |");
+        System.out.println("|     Opcao 4 - Sair                  |");
 
         int option = input.nextInt();
 
@@ -186,12 +185,9 @@ public class Mercado {
                 listarRevistas();
                 break;
             case 3:
-//                mediaRevistas();
-                break;
-            case 4:
                 menu();
                 break;
-            case 5:
+            case 4:
                 System.out.println("Obrigado pela preferência! Volte sempre.");
                 System.exit(0);
                 break;
