@@ -355,7 +355,7 @@ public class Mercado {
     private static void apagarRevistaTopo(double valorDaCompra) throws InterruptedException {
         if (valorDaCompra/100 >= pilha.size()){
             for (int quantidadeRevistas=(int) (valorDaCompra/100) ; quantidadeRevistas >= 1; quantidadeRevistas--) {
-                String popedAt = DataHora.getDateTime();
+                String popedAt = DataHora.getTime(DataHora.getDateTime()) + " em: " + DataHora.getDate(DataHora.getDateTime());
                 LocalTime stacked = LocalTime.parse(pilha.peek().getStackedTime());
                 String dataAtual = DataHora.getTime(DataHora.getDateTime());
 
@@ -364,9 +364,9 @@ public class Mercado {
 
                 mediaRevistas(tempoPermanecidoSegundos);
                 System.out.println(
-                        "A REVISTA: \n"  +
+                        "A revista: \n"  +
                                 pilha.peek() +
-                                "\nFOI REMOVIDA DA PILHA COM SUCESSO EM: " +
+                                "\nFoi removida da pilha com sucesso as: " +
                                 popedAt +
                                 "\nEla permaneceu: " + tempoPermanecido + " na pilha."+
                                 "\n----------------------------------------");
@@ -394,7 +394,7 @@ public class Mercado {
     }
 
     private static void mediaRevistas(int tempoPermanecidoSegundos) {
-        System.out.println("Tempo médio de permanência das revistas: " + tempoPermanecidoSegundos/tempoPermanecidoSegundos);
+        System.out.println("Tempo médio de permanência das revistas: " + tempoPermanecidoSegundos/tempoPermanecidoSegundos + " minutos");
     }
 
 }
