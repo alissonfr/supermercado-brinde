@@ -354,9 +354,12 @@ public class Mercado {
 
     private static void apagarRevistaTopo(double valorDaCompra) throws InterruptedException {
         String popedAt = DataHora.getDateTime();
-
         String popedTime = DataHora.getTime(popedAt);
-        LocalTime agora = LocalTime.parse(DataHora.getTime(DataHora.getDateTime()));
+
+        LocalTime stacked = LocalTime.parse(pilha.peek().getStackedTime());
+        String dataAtual = DataHora.getTime(DataHora.getDateTime());
+
+        String tempoPermanecido = DataHora.mostrar(stacked, dataAtual);
         // TODO: SE NAO TIVER REVISTAS SUFICIENTES DÁ ERRO
 
         for (int quantidadeRevistas=(int) (valorDaCompra/100) ; quantidadeRevistas >= 1; quantidadeRevistas--) {
@@ -365,10 +368,23 @@ public class Mercado {
                             pilha.peek() +
                             "\nFOI REMOVIDA DA PILHA COM SUCESSO EM: " +
                             popedAt +
-                            "\nela permaneceu: " + DataHora.mostrar(agora, popedTime) + " na pilha."+
+                            "\nEla permaneceu: " + tempoPermanecido + " na pilha."+
+                                    "     dataAtual: "  + dataAtual + " stacked: " + stacked +
                             "\n----------------------------------------");
             pilha.pop();
         }
+        int tempoPermanecidoSegundos = DataHora.dateToSeconds(tempoPermanecido);
+
+        System.out.println("Tempo médio de permanência das revistas: " + tempoPermanecidoSegundos);
+
+        int TotalSum=0;
+        int A[]={1,2,3,4,5};
+        int n= A.length;
+        for (int i=0; i<n;i++) {
+            TotalSum = TotalSum + A[i];
+            System.out.println("The average=" + (float) (TotalSum / n));
+        }
+
         Thread.sleep(5000);
         menu();
 
