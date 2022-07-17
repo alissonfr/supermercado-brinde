@@ -172,8 +172,9 @@ public class Mercado {
         System.out.println("************ Selecione uma operacao ************");
         System.out.println("|     Opcao 1 - Cadastrar Revista     |");
         System.out.println("|     Opcao 2 - Listar Revistas       |");
-        System.out.println("|     Opcao 3 - Voltar                |");
-        System.out.println("|     Opcao 4 - Sair                  |");
+        System.out.println("|     Opcao 3 - Média de tempo        |");
+        System.out.println("|     Opcao 4 - Voltar                |");
+        System.out.println("|     Opcao 5 - Sair                  |");
 
         int option = input.nextInt();
 
@@ -185,9 +186,12 @@ public class Mercado {
                 listarRevistas();
                 break;
             case 3:
-                menu();
+//                mediaRevistas();
                 break;
             case 4:
+                menu();
+                break;
+            case 5:
                 System.out.println("Obrigado pela preferência! Volte sempre.");
                 System.exit(0);
                 break;
@@ -343,7 +347,7 @@ public class Mercado {
         String stackedTime = DataHora.getTime(DataHora.getDateTime());
         String stackedDate = DataHora.getDate(DataHora.getDateTime());
 
-        Revista revista = new Revista(title, edition, publishedAt, volume, stackedTime, stackedDate);
+        Revista revista = new Revista(title, edition, publishedAt, volume, stackedTime, stackedDate, 0);
         pilha.push(revista);
 
         System.out.println(
@@ -353,41 +357,33 @@ public class Mercado {
     }
 
     private static void apagarRevistaTopo(double valorDaCompra) throws InterruptedException {
-        String popedAt = DataHora.getDateTime();
-        String popedTime = DataHora.getTime(popedAt);
+        if (valorDaCompra/100 >= pilha.size()){
+            for (int quantidadeRevistas=(int) (valorDaCompra/100) ; quantidadeRevistas >= 1; quantidadeRevistas--) {
+                String popedAt = DataHora.getDateTime();
+                LocalTime stacked = LocalTime.parse(pilha.peek().getStackedTime());
+                String dataAtual = DataHora.getTime(DataHora.getDateTime());
 
-        LocalTime stacked = LocalTime.parse(pilha.peek().getStackedTime());
-        String dataAtual = DataHora.getTime(DataHora.getDateTime());
+                String tempoPermanecido = DataHora.mostrar(stacked, dataAtual);
+                int tempoPermanecidoSegundos = DataHora.dateToSeconds(tempoPermanecido);
 
-        String tempoPermanecido = DataHora.mostrar(stacked, dataAtual);
-        // TODO: SE NAO TIVER REVISTAS SUFICIENTES DÁ ERRO
+                mediaRevistas(tempoPermanecidoSegundos);
+                System.out.println(
+                        "A REVISTA: \n"  +
+                                pilha.peek() +
+                                "\nFOI REMOVIDA DA PILHA COM SUCESSO EM: " +
+                                popedAt +
+                                "\nEla permaneceu: " + tempoPermanecido + " na pilha."+
+                                "\n----------------------------------------");
+                pilha.pop();
+            }
 
-        for (int quantidadeRevistas=(int) (valorDaCompra/100) ; quantidadeRevistas >= 1; quantidadeRevistas--) {
-            System.out.println(
-                            "A REVISTA: \n"  +
-                            pilha.peek() +
-                            "\nFOI REMOVIDA DA PILHA COM SUCESSO EM: " +
-                            popedAt +
-                            "\nEla permaneceu: " + tempoPermanecido + " na pilha."+
-                                    "     dataAtual: "  + dataAtual + " stacked: " + stacked +
-                            "\n----------------------------------------");
-            pilha.pop();
+
+            Thread.sleep(5000);
+            menu();
+        } else {
+            System.out.println("Não temos revistas para a sua quantidade de compras! Tente novamente mais tarde. :(");
+            System.exit(0);
         }
-        int tempoPermanecidoSegundos = DataHora.dateToSeconds(tempoPermanecido);
-
-        System.out.println("Tempo médio de permanência das revistas: " + tempoPermanecidoSegundos);
-
-        int TotalSum=0;
-        int A[]={1,2,3,4,5};
-        int n= A.length;
-        for (int i=0; i<n;i++) {
-            TotalSum = TotalSum + A[i];
-            System.out.println("The average=" + (float) (TotalSum / n));
-        }
-
-        Thread.sleep(5000);
-        menu();
-
     }
 
     private static void listarRevistas() throws InterruptedException {
@@ -400,6 +396,10 @@ public class Mercado {
             System.out.println("A pilha de revistas está vazia!");
         }
         menuAdministrador();
+    }
+
+    private static void mediaRevistas(int tempoPermanecidoSegundos) {
+        System.out.println("Tempo médio de permanência das revistas: " + tempoPermanecidoSegundos);
     }
 
 }

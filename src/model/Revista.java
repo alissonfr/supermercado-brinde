@@ -11,11 +11,11 @@ public class Revista {
     private String publishedAt;
     private int volume;
     private String stackedTime;
-
     private String stackedDate;
+    private int media;
 
 
-    public Revista(String title, int edition, String publishedAt, int volume, String stackedTime, String stackedDate) {
+    public Revista(String title, int edition, String publishedAt, int volume, String stackedTime, String stackedDate, int media) {
         this.id = count;
         this.title = title;
         this.edition = edition;
@@ -23,6 +23,7 @@ public class Revista {
         this.volume = volume;
         this.stackedTime = stackedTime;
         this.stackedDate = stackedDate;
+        this.media = media;
         Revista.count += 1;
     }
 
@@ -76,6 +77,14 @@ public class Revista {
 
     public void setStackedDate(String stackedDate) {
         this.stackedDate = stackedDate;
+    }
+
+    public int getMedia() {
+        return media;
+    }
+
+    public void setMedia(int media) {
+        this.media = media;
     }
 
     @Override
