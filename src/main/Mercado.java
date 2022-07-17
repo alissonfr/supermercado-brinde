@@ -295,8 +295,8 @@ public class Mercado {
         Thread.sleep(2000);
 
         int quantidadeRevistas = (int) (valorDaCompra/100);
-        System.out.println("Valor total das suas compras: " + Utils.doubleToString(valorDaCompra) +
-                "\nVocê deve receber: " + quantidadeRevistas + " revistas!");
+        System.out.println("\n\nValor total das suas compras: " + Utils.doubleToString(valorDaCompra) +
+                "\nVocê deve receber: " + quantidadeRevistas + " revistas!\n");
         carrinho.clear();
 
         if (!(valorDaCompra < 100)) {
@@ -376,7 +376,6 @@ public class Mercado {
                                 "\n----------------------------------------");
                 pilha.pop();
             }
-
 
             Thread.sleep(5000);
             menu();
