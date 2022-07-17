@@ -1,0 +1,16 @@
+## INSTRUÇÕES 
+A prova em grupo consiste no desenvolvimento de aplicação usando-se de recursos de programação disponibilizados pela linguagem de programação Java. Devem ser adotadas diretrizes que se seguem abaixo para sua implementação: 
+#### PILHAS DE REVISTAS 
+Neste projeto, considere a existência de um pequeno supermercado que oferece, a título de promoção, 1 (uma) revista de brinde a cada R$ 100,00 de compra. Tratam-se de revistas em bom estado de preservação e oriundas de coleção particular mantida pelos proprietários do supermercado ao longo dos últimos anos. As revistas são empilhadas ao lado do único checkout de caixa disponível, cabendo, através da aplicação, cadastrar os seguintes dados a respeito delas: 
+a) título; b) número de edição; c) mês e ano de publicação; e d) número de volume, se for o caso. 
+**O uso de coleções genéricas concretas para a manipulação da pilha de revistas é obrigatório**. Ao processar cada compra, deverão ser fornecidas quantidades de uma ou mais mercadorias para, após isso, chegar-se ao valor final da compra e à quantidade de revistas que seriam dadas ao cliente, conforme promoção acima citada. Para fins de simplificação, estarão disponíveis para compra apenas mercadorias que se seguem abaixo acompanhadas de seus respectivos preços:
+
+![table de produtos](/assets/images/lista-produtos.png)
+
+Além das operações de empilhamento de revistas e processamento de compras, a aplicação desenvolvida deve dispor ainda das seguintes funcionalidades e/ou restrições:
+* Possibilidade de empilhamento de novas revistas a qualquer momento (mesmo que algumas compras já tenham sido processadas);
+* Ao final do processamento de cada compra, desempilhamento de revistas em quantidade idêntica à quantidade de revistas que deverão, a título de brinde, serem entregues ao cliente, se for o caso (conforme regras de promoção supracitada e considerando, além disso, disponibilidade de revistas em pilha posicionada ao lado do checkout de caixa);
+* Registro de horários de empilhamento e desempilhamento de cada revista, assumindo-se em cada registro dia e horário corrente;
+* Em consonância com o descrito no penúltimo item anterior a este, exibição, ao final do processamento de cada compra, de dados das revistas entregues (título, número de edição, mês e ano de publicação e, se for o caso, número de volume), bem como tempo expresso em horas, minutos e segundos durante os quais cada uma delas permaneceu empilhada;
+* Associação de código numérico único a cada uma das mercadorias que constam na relação acima, para indicação das respectivas quantidades em cada compra (não há exigência de que todos os itens sejam comprados em cada compra);
+* Consultas sobre as revistas empilhadas, a saber: a) dados de título, número de edição, mês e ano de publicação e número de volume (este último, se for o caso) da última revista empilhada; b) dados de título, número de edição, mês e ano de publicação e número de volume (este último, se for o caso) da última revista desempilhada, para fins de entrega ao cliente da última compra que tenha se enquadrado nos critérios da promoção aludidos anteriormente; c) tempo médio de permanência de revistas entregues aos clientes em pilha ao lado do checkout de caixa; d) relação de revistas empilhadas por ano de publicação; e e) relação de revistas desempilhadas por ano de publicação.

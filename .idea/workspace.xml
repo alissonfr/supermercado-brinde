@@ -46,6 +46,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.editor"
   }
 }]]></component>
@@ -135,7 +138,7 @@
       <updated>1657586406296</updated>
       <workItem from="1657586449411" duration="1035000" />
       <workItem from="1657657600184" duration="6634000" />
-      <workItem from="1657848799879" duration="58222000" />
+      <workItem from="1657848799879" duration="60059000" />
     </task>
     <servers />
   </component>
@@ -160,15 +163,6 @@
           <url>file://$PROJECT_DIR$/src/model/Produto.java</url>
           <line>66</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/Mercado.java</url>
-          <line>112</line>
-          <properties class="main.Mercado" method="menu">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.util.InputMismatchException" package="java.util" />

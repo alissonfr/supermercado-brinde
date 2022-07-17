@@ -20,8 +20,6 @@ public class dataHora {
         return time;
     };
 
-
-
     public static final DateTimeFormatter FORMATO_HORAS = DateTimeFormatter
             .ofPattern("HH:mm:ss")
             .withResolverStyle(ResolverStyle.STRICT);
@@ -36,10 +34,6 @@ public class dataHora {
 
         return falta.format(FORMATO_HORAS);
     }
-
-    public static void main(String[] args) {
-
-    };
 
 }
 
