@@ -1,5 +1,5 @@
 ## INSTRUÇÕES 
-A prova em grupo consiste no desenvolvimento de aplicação usando-se de recursos de programação disponibilizados pela linguagem de programação Java. Devem ser adotadas diretrizes que se seguem abaixo para sua implementação: 
+Avaliação final da diciplina Estruturas de Dados. Consiste no desenvolvimento de aplicação usando-se de recursos de programação disponibilizados pela linguagem de programação Java. 
 #### PILHAS DE REVISTAS 
 Neste projeto, considere a existência de um pequeno supermercado que oferece, a título de promoção, 1 (uma) revista de brinde a cada R$ 100,00 de compra. Tratam-se de revistas em bom estado de preservação e oriundas de coleção particular mantida pelos proprietários do supermercado ao longo dos últimos anos. As revistas são empilhadas ao lado do único checkout de caixa disponível, cabendo, através da aplicação, cadastrar os seguintes dados a respeito delas: 
 a) título; b) número de edição; c) mês e ano de publicação; e d) número de volume, se for o caso. 
